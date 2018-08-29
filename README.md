@@ -1,1 +1,1 @@
-Authorship verification by OCCAV method (compression based)
+Authorship Verification based on Compression-Models ([OCCAV](https://arxiv.org/pdf/1706.00516.pdf))
