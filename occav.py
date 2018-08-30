@@ -4,7 +4,7 @@ import os
 import re
 import lzma
 import math
-from CorpusProcessor import author_dictionary
+from CorpusProcessor import author_dictionary, author_dictionary_italian
 
 
 def CBC(character_seq_x, character_seq_y):
@@ -42,7 +42,9 @@ def occav(true_author, candidate_author, unknown_author_file_path, known_author_
         cbc_y = CBC(y_min_doc_contents, known_author_doc_contents)
         print("file= ", file, "cbc_y =",cbc_y)
         cbc_sum_known_authors = cbc_sum_known_authors + cbc_y
-    s_avg = cbc_sum_known_authors / (other_token_files.__len__())
+    s_avg = cbc_sum_known_authors
+    if other_token_files.__len__() > 0:
+        s_avg = cbc_sum_known_authors / (other_token_files.__len__())
     result = ""
     if s_min < s_avg:
         result = "accepted"
@@ -73,10 +75,13 @@ def evaluate_occav(author_dict, token_path):
 #french_author_dict = author_dictionary(french_corpus_token_path, french_correct_author_path)
 #evaluate_occav(french_author_dict, french_corpus_token_path)
 
-english_corpus_token_path = '/Users/sukanyanath/Documents/PhD/Datasets/English/Token'
-english_correct_author_path = '/Users/sukanyanath/Documents/PhD/Datasets/English/Author.txt'
-english_author_dict = author_dictionary(english_corpus_token_path, english_correct_author_path)
+#english_corpus_token_path = '/Users/sukanyanath/Documents/PhD/Datasets/English/Token'
+#english_correct_author_path = '/Users/sukanyanath/Documents/PhD/Datasets/English/Author.txt'
+#english_author_dict = author_dictionary(english_corpus_token_path, english_correct_author_path)
+#evaluate_occav(english_author_dict, english_corpus_token_path)
 
-evaluate_occav(english_author_dict, english_corpus_token_path)
 
 
+italian_corpus_token_path = '/Users/sukanyanath/Documents/PhD/Datasets/Italian/Token'
+italian_author_dict = author_dictionary_italian(italian_corpus_token_path)
+evaluate_occav(italian_author_dict, italian_corpus_token_path)
